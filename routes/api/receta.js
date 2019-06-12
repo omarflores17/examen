@@ -22,6 +22,21 @@ recetaCollection.push(Object.assign({},recetaStruct,{
     estado:'ACT'
 }));
 
+router.get('/:id',(req, res, next)=>{
+    if(!this.report.params.id) return next();
+    var id = req.params.id;
+    var receta = receta.recetaCollection.filter((e, i)=>{
+        return (e.id === id);
+    });
+    
+    if (receta.length > 0){
+        res.status(200).json(receta[0]);
+    }
+    else{
+        res.status(404).json({});
+    }
+});
+
 router.get('/',(req, res, next)=>{
     res.status(200).json(recetaCollection)
 });
