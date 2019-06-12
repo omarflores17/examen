@@ -26,4 +26,10 @@ router.get('/',(req, res, next)=>{
     res.status(200).json(recetaCollection)
 });
 
+router.post('/',(req, res, next)=>{
+    var newReceta = Object.assign({}, recetaStruct, req.body, {id:uuid()});
+    recetaCollection.push(newReceta);
+    res.status(200).json(newReceta);
+});
+
 module.exports=router;
