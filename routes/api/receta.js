@@ -32,4 +32,19 @@ router.post('/',(req, res, next)=>{
     res.status(200).json(newReceta);
 });
 
+router.put('/:id', (req, res, next)=>{
+    var id = req.params.id;
+    var recetamod = {};
+    var recetaorg = {};
+    recetaCollection = recetaCollection.map((e, i)=>{
+        if(e.id === id){
+            recetaorg = Object.assign({}, e);
+            return recetamod = Object.assign({}, e, req.body);
+        }
+        return e;
+    });
+    res.status(200).json({Original: recetaorg, Modificada: recetamod});
+});
+
+
 module.exports=router;
