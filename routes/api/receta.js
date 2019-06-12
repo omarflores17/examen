@@ -1,6 +1,6 @@
 const express= require('express');
 var router = express.Router();
-var uuid=require('uuid/v4')
+var uuid=require('uuid/v4');
 
 var recetaCollection = [];
 
@@ -44,6 +44,19 @@ router.put('/:id', (req, res, next)=>{
         return e;
     });
     res.status(200).json({Original: recetaorg, Modificada: recetamod});
+});
+
+router.delete('/:id',(req, res, next)=>{
+    var id = req.params.id;
+    var recetaEliminada = {};
+    recetaCollection = recetaCollection.filter((e, i)=>{
+        if(e.id===id){
+            recetaEliminada = Object.assign({}, e)
+            return false;
+        }
+        return true;
+    });
+    res.status(200).json({Eliminada: recetaEliminada, Coleccion: recetaCollection});
 });
 
 
